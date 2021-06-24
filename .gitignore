@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+bin/
 
 # If you are using PyCharm #
 .idea/**/workspace.xml
