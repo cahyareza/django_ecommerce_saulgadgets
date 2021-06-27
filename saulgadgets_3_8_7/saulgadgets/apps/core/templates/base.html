@@ -24,7 +24,6 @@
 					{% for category in menu_categories %}
 						<a href="{% url 'category_detail' category.slug %}" class="navbar-item">{{ category.tittle }}</a>
 					{% endfor %}
-					<a class="navbar-item" href="{% url 'contact' %}">Contact</a>
 				</div>
 			</div>
 		</nav>
@@ -33,5 +32,16 @@
 			{% block content %}
             {% endblock %}
 		</section>
+
+		<footer class="footer">
+			<div class="columns">
+				<div class="column is-4">
+					<h2 class="subtitle">Saul Gadgets</h2>
+				</div>
+				<div class="column is-8">
+					<a class="navbar-item" href="{% url 'contact' %}">Contact</a>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>
