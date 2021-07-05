@@ -1,11 +1,72 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="title">{{ product.title }}</h1>
+    <div id="productapp">
+        <h1 class="title">{{ product.title }}</h1>
 
-    <h2 class="subtitle">{{ product.price }}</h2>
+        <h2 class="subtitle">{{ product.price }}</h2>
 
-    {% if product.description %}
-        <p>{{ product.description }}</p>
-    {% endif %}
+        {% if product.description %}
+            <p>{{ product.description }}</p>
+        {% endif %}
+
+        <button @click="addToCart({{ product.id }})">Add to cart</button>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var productapp = new Vue({
+        el: '#productapp',
+        delimeters: ['[[', ']]'],
+        data () {
+            return {
+
+            }
+        },
+        mounted() {
+            console.log('Mounted');
+        },
+        methods: {
+            addToCart(product_id) {
+                console.log('Product_id', product_id);
+
+                var data = {
+                    'product_id': product_id,
+                    'update': false,
+                    'quantity':1
+                };
+
+                fetch('/api/add_to_cart/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    if (result.error) {
+                        console.log('Error1');
+
+                        throw result;
+                    }
+
+                    return result;
+                })
+                .then((result) => {
+                    if (result) {
+                        console.log('Added to cart');
+                    }
+                })
+                .catch(function (error) {
+                    console.log('Error 2');
+                })
+            }
+        },
+
+    })
+</script>
 {% endblock %}
