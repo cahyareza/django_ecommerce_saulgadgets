@@ -30,3 +30,17 @@ def api_add_to_cart(request):
 
     # convert dictionary to JSON string
     return JsonResponse(jsonresponse)
+
+def api_remove_from_cart(request):
+    # JSON.loads, parse a valid JSON string and convert it to python dictionary
+    data = json.loads(request.body)
+    jsonresponse = {'success': True}
+    # get value of dictionary
+    product_id = str(data['product_id'])
+
+    # initialize objects cart
+    cart = Cart(request)
+
+    cart.remove(product_id)
+
+    return JsonResponse(jsonresponse)

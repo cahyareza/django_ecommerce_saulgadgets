@@ -1,5 +1,6 @@
 from django.conf import settings
 
+from apps.store.models import Product
 
 class Cart(object):
     '''
@@ -36,14 +37,14 @@ class Cart(object):
         # untuk mendapatkan product yang sesuai di data base dengan yang di POST di web console(Network)
         for p in product_ids:
             # memasukan data id ke list
-            product_clean_ids.appends(p)
+            product_clean_ids.append(p)
 
             # mengambil data sesuai session dengan database dengan parameter p
             self.cart[str(p)]['product'] = Product.objects.get(pk=p)
 
         # untuk mencari total
         for item in self.cart.values():
-            item['total_price'] = int(item['price']) * int(item['quantity'])
+            item['total_price'] = item['price'] * int(item['quantity'])
 
             yield item
 
@@ -67,6 +68,11 @@ class Cart(object):
             self.cart[product_id]["quantity"] = self.cart[product_id]["quantity"] + 1
 
         self.save()
+
+    def remove(self, product_id):
+        if product_id in self.cart:
+            del self.cart[product_id]
+            self.save()
 
     def save(self):
         # update session
