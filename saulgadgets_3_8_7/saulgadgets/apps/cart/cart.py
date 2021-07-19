@@ -44,7 +44,7 @@ class Cart(object):
 
         # untuk mencari total
         for item in self.cart.values():
-            item['total_price'] = item['price'] * int(item['quantity'])
+            item['total_price'] = float(item['price']) * int(item['quantity'])
 
             yield item
 

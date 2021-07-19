@@ -26,7 +26,7 @@
             }
         },
         mounted() {
-<!--            console.log('Mounted');-->
+            console.log('Mounted');
         },
         methods: {
             addToCart(product_id) {
@@ -35,7 +35,7 @@
                 var data = {
                     'product_id': product_id,
                     'update': false,
-                    'quantity':1
+                    'quantity': 1
                 };
 
                 fetch('/api/add_to_cart/', {
