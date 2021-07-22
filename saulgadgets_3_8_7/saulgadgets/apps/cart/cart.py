@@ -80,4 +80,4 @@ class Cart(object):
         self.session.modified = True
 
     def get_total_length(self):
-        return sum(int(item['quantity']) for item in self.cart.values())
+        return sum(item['quantity'] for item in self.cart.values())
