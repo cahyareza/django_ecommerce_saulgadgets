@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+
+STRIPE_API_KEY_PUBLISHABE = "pk_test_51JIxxJGeAbDQjCp40BY0dvIbWdwk0FCLTAC46NJAXaRZIYC6i35IIVBp58kP5RFB356VACwjlKrogrI2Fof9wGZ500Hbn361ao"
+STRIPE_API_KEY_HIDDEN = "sk_test_51JIxxJGeAbDQjCp4RsaPRmxLtEVXDmhK6pTJpVuzuxw1EMaMnLQVAeT6H9CPcJnd9JVPb2viIoNiF7ZuqxVc1ClV00XiFI3Jx3"
+
 import os
 
 from pathlib import Path
@@ -72,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'apps.store.context_processor.menu_categories',
+                'apps.cart.context_processors.cart',
             ],
         },
     },
